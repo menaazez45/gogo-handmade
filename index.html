@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع بيع الملابس</title>
+    <style>
+        body {
+            text-align: center;
+            margin-right: 20px;
+        }
+
+        .products-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .product {
+            width: 300px;
+            margin: 20px;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+        }
+
+        .cart {
+            margin-top: 50px;
+        }
+
+        .cart-item {
+            margin-bottom: 20px;
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: auto;
+            vertical-align: middle;
+        }
+
+        .cart-item .product-name {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .remove-btn {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            display: none;
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        .total-price {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>موقع بيع الملابس</h1>
+    
+    <h2>المنتجات</h2>
+    <div class="products-container">
+        <div class="product" data-price="100">
+            <img src="clothing1.jpg" alt="ملابس">
+            <h3>اسم المنتج 1</h3>
+            <p>وصف المنتج ومعلومات إضافية.</p>
+            <p>السعر: 100 جنيه مصري</p>
+            <button class="buy-btn" data-product="اسم المنتج 1" data-price="100">شراء</button>
+        </div>
+        <div class="product" data-price="120">
+            <img src="clothing2.jpg" alt="ملابس">
+            <h3>اسم المنتج 2</h3>
+            <p>وصف المنتج ومعلومات إضافية.</p>
+            <p>السعر: 120 جنيه مصري</p>
+            <button class="buy-btn" data-product="اسم المنتج 2" data-price="120">شراء</button>
+        </div>
+        <!-- يمكنك إضافة المزيد من عناصر المنتجات هنا -->
+    </div>
+
+    <div class="cart">
+        <h2>سلة المشتريات</h2>
+        <div class="cart-items"></div>
+        <p class="total-price">السعر الإجمالي: 0 جنيه مصري</p>
+        <button class="submit-btn">إرسال الطلب</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let totalCartPrice = 0;
+
+            const buyButtons = document.querySelectorAll('.buy-btn');
+            const cartItemsContainer = document.querySelector('.cart-items');
+            const submitButton = document.querySelector('.submit-btn');
+            const totalPriceElement = document.querySelector('.total-price');
+
+            buyButtons.forEach(function(button) {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const productName = button.getAttribute('data-product');
+                    const productPrice = parseFloat(button.getAttribute('data-price'));
+                    addToCart(productName, productPrice);
+                });
+            });
+
+            submitButton.addEventListener('click', function() {
+                const cartItems = document.querySelectorAll('.cart-item');
+                let orderList = '';
+                cartItems.forEach(function(item) {
+                    const productName = item.getAttribute('data-product');
+                    const quantity = parseInt(item.getAttribute('data-quantity'));
+                    orderList += productName + ' (الكمية: ' + quantity + ')\n';
+                });
+                sendOrder(orderList);
+            });
+
+            function addToCart(productName, productPrice) {
+                const cartItem = document.querySelector(`.cart-item[data-product="${productName}"]`);
+                if (cartItem) {
+                    const quantityElement = cartItem.querySelector('.product-quantity');
+                    let quantity = parseInt(quantityElement.textContent);
+                    quantity++;
+                    quantityElement.textContent = quantity;
+                    cartItem.setAttribute('data-quantity', quantity);
+                } else {
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart-item');
+                    cartItem.setAttribute('data-product', productName);
+                    cartItem.setAttribute('data-quantity', '1');
+                    cartItem.setAttribute('data-price', productPrice);
+                    cartItem.innerHTML = `
+                        <img src="clothing1.jpg" alt="ملابس">
+                        <span class="product-name">${productName}</span>
+                        <span class="product-price">${productPrice} جنيه مصري</span>
+                        <span class="product-quantity">1</span>
+                        <button class="remove-btn" data-product="${productName}" data-price="${productPrice}">حذف</button>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                }
+                updateTotalPrice(productPrice);
+                checkCart();
+                const removeButtons = document.querySelectorAll('.remove-btn');
+                removeButtons.forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        const priceToRemove = parseFloat(button.getAttribute('data-price'));
+                        const quantityElement = button.parentNode.querySelector('.product-quantity');
+                        let quantity = parseInt(quantityElement.textContent);
+                        if (quantity > 1) {
+                            quantity--;
+                            quantityElement.textContent = quantity;
+                        } else {
+                            button.parentNode.remove();
+                        }
+                        updateTotalPrice(-priceToRemove);
+                        checkCart();
+                    });
+                });
+            }
+
+            function updateTotalPrice(priceDifference) {
+                totalCartPrice += priceDifference;
+                if (totalCartPrice < 0) {
+                    totalCartPrice = 0;
+                }
+                totalPriceElement.textContent = "السعر الإجمالي: " + totalCartPrice.toFixed(2) + " جنيه مصري";
+            }
+
+            function checkCart() {
+                const cartItems = document.querySelectorAll('.cart-item');
+                if (cartItems.length > 0) {
+                    submitButton.style.display = 'block';
+                } else {
+                    submitButton.style.display = 'none';
+                }
+            }
+
+            function sendOrder(orderList) {
+                const email = "menaazez217@gmail.com";
+                const subject = "طلب منتجات";
+                const body = "أود شراء المنتجات التالية:\n" + orderList + "\nالرجاء التواصل معي في أقرب وقت ممكن.";
+                const mailtoLink = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+                window.location.href = mailtoLink;
+            }
+        });
+    </script>
+</body>
+</html>
