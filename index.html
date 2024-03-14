@@ -71,6 +71,15 @@
         .total-price {
             margin-top: 20px;
         }
+        .b {
+            position: absolute;
+            top: 10px; /* تعديل حسب الحاجة */
+            right: 20px; /* تعديل حسب الحاجة */
+            width: 100px;
+            height: 40px;
+            background-color: green;
+            border-radius: 20%;
+        }
     </style>
 </head>
 <body>
@@ -199,6 +208,31 @@
                 window.location.href = mailtoLink;
             }
         });
+    </script>
+    <button class="b" onclick="share()">مشاركة</button>
+
+    <script>
+        function share() {
+            const url = window.location.href;
+            const title = document.title;
+            const shareText = 'تفضلوا بزيارة موقع بيع الملابس';
+            const shareMessage = `${shareText}\n${title}: ${url}`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: shareText,
+                    url: url
+                }).then(() => {
+                    console.log('تمت المشاركة بنجاح.');
+                }).catch((error) => {
+                    console.error('حدث خطأ أثناء المشاركة:', error);
+                });
+            } else {
+                console.log('متصفحك لا يدعم المشاركة.');
+                console.log('الرسالة المشتركة:', shareMessage);
+            }
+        }
     </script>
 </body>
 </html>
