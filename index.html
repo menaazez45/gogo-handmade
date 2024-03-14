@@ -306,15 +306,34 @@
                     submitButton.style.display = 'none';
                 }
             }
-
-            function sendOrder(orderList) {
-                const email = "menaazez217@gmail.com";
-                const subject = "طلب منتجات";
-                const body = "أود شراء المنتجات التالية:\n" + orderList + "\nالرجاء التواصل معي في أقرب وقت ممكن.";
-                const mailtoLink = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-                window.location.href = mailtoLink;
-            }
-        });
+            
+                // إنشاء الرسالة للبريد الإلكتروني بتضمين معلومات الطلب والسعر الإجمالي
+                function sendOrder(orderList) {
+                    let totalPrice = 0; // إجمالي سعر الطلب
+                    let images = ''; // روابط الصور
+                
+                    // حساب إجمالي سعر الطلب وجمع روابط الصور بتحليل القائمة من المنتجات
+                    orderList.split('\n').forEach(function(item) {
+                        const regexPrice = /price : (\d+)/g;
+                        const regexImage = /<img src="([^"]+)"/g;
+                        const matchPrice = regexPrice.exec(item);
+                        const matchImage = regexImage.exec(item);
+                        if (matchPrice && matchImage) {
+                            const price = parseInt(matchPrice[1]);
+                            const imageSrc = matchImage[1];
+                            totalPrice += price;
+                            images += `<img src="${imageSrc}" alt="منتج">\n`;
+                        }
+                    });
+                
+                    // إنشاء الرسالة للبريد الإلكتروني بتضمين معلومات الطلب والسعر الإجمالي وروابط الصور
+                    const email = "menaazez217@gmail.com";
+                    const subject = "Send Request ";
+                    const body = "أود شراء المنتجات التالية:\n" + orderList + "\nالرجاء التواصل معي في أقرب وقت ممكن.";
+                    const mailtoLink = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+                    window.location.href = mailtoLink;
+                }
+          } )               
 
         function share() {
             const url = window.location.href;
