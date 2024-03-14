@@ -80,26 +80,132 @@
             background-color: green;
             border-radius: 20%;
         }
+        .product img {
+            width: 150px;
+            height: auto;
+        }
+        .product p{
+            font-size: 30px;
+        }
     </style>
 </head>
 <body>
-    <h1>موقع بيع الملابس</h1>
+    <h1>Handmade 💗</h1>
     
-    <h2>المنتجات</h2>
+    <button class="b" onclick="share()">مشاركة</button>
+
+    
     <div class="products-container">
-        <div class="product" data-price="100">
-            <img src="clothing1.jpg" alt="ملابس">
-            <h3>اسم المنتج 1</h3>
-            <p>وصف المنتج ومعلومات إضافية.</p>
-            <p>السعر: 100 جنيه مصري</p>
-            <button class="buy-btn" data-product="اسم المنتج 1" data-price="100">شراء</button>
+        <div class="product" data-price="60">
+            <img class="img" src="المنتج الاول.jpg" alt="ملابس">
+          <h3>CROCHET AIRPOD CASE</h3>
+            
+            <p class="p">price: 60 </p>
+            <button class="buy-btn" data-product="CROCHET AIRPOD CASE" data-price="60">شراء</button>
         </div>
+        <div class="product" data-price="80">
+            <img class="img" src="المنتج الثاني.jpg" alt="ملابس">
+            <h3>Mug warmer crochet</h3>
+            
+            <p>price : 80</p>
+            <button class="buy-btn" data-product="Mug warmer crochet" data-price="80">شراء</button>
+        </div>
+
+        <div class="product" data-price="130">
+            <img class="img" src="المنتج الثالث.jpg" alt="ملابس">
+            <h3>Crochet jewelry holder in a frame</h3>
+            
+            <p>price : 130</p>
+            <button class="buy-btn" data-product="Crochet jewelry holder in a frame" data-price="130">شراء</button>
+        </div>
+
+        <div class="product" data-price="150">
+            <img class="img" src="المنتج الرابع.jpg" alt="ملابس">
+            <h3>Crochet bag</h3>
+            
+            <p>price : 150</p>
+            <button class="buy-btn" data-product="Crochet bag" data-price="150">شراء</button>
+        </div>
+
+        <div class="product" data-price="150">
+            <img class="img" src="المنتج الخامس.jpg" alt="ملابس">
+            <h3>Crochet bag</h3>
+            
+            <p>price : 150</p>
+            <button class="buy-btn" data-product="Crochet bag" data-price="150">شراء</button>
+        </div>
+
         <div class="product" data-price="120">
-            <img src="clothing2.jpg" alt="ملابس">
-            <h3>اسم المنتج 2</h3>
-            <p>وصف المنتج ومعلومات إضافية.</p>
-            <p>السعر: 120 جنيه مصري</p>
-            <button class="buy-btn" data-product="اسم المنتج 2" data-price="120">شراء</button>
+            <img class="img" src="المنتج السادس.jpg" alt="ملابس">
+            <h3>Wintericecap</h3>
+            
+            <p>price : 120</p>
+            <button class="buy-btn" data-product="Winter icecap" data-price="120">شراء</button>
+        </div>
+
+        
+        <div class="product" data-price="250">
+            <img class="img" src="المنتج السابع.jpg" alt="ملابس">
+            
+            
+            <p>price : 250</p>
+            <button class="buy-btn" data-product="Winter icecap" data-price="250">شراء</button>
+        </div>
+
+        <div class="product" data-price="200">
+            <img class="img" src= "المنتج الثامن.jpg" alt="ملابس">
+            <h3>Crochet bag</h3>
+            
+            <p>price : 200</p>
+            <button class="buy-btn" data-product="Crochet bag" data-price="200">شراء</button>
+        </div>
+
+        <div class="product" data-price="450">
+            <img class="img" src= "المنتج التاسع.jpg" alt="ملابس">
+            <h3>Trendy Crochet Mesh Top</h3>
+            
+            <p>price : 450</p>
+            <button class="buy-btn" data-product="Trendy Crochet Mesh Top" data-price="450">شراء</button>
+        </div>
+
+        <div class="product" data-price="350">
+            <img class="img" src= "المنتج العاشر.jpg" alt="ملابس">
+            <h3>Crochet Mesh Top</h3>
+            
+            <p>price : 350</p>
+            <button class="buy-btn" data-product="Crochet Mesh Top" data-price="350">شراء</button>
+        </div>
+
+        <div class="product" data-price="500">
+            <img class="img" src= "المنتج الحادي عشر.jpg" alt="ملابس">
+            <h3>Crochet winter pullover</h3>
+            
+            <p>price : 500</p>
+            <button class="buy-btn" data-product="Crochet winter pullover" data-price="500">شراء</button>
+        </div>
+
+        <div class="product" data-price="250">
+            <img class="img" src= "المنتج الثاني عشر.jpg" alt="ملابس">
+            
+            
+            <p>price : 250</p>
+            <button class="buy-btn" data-product="1" data-price="250">شراء</button>
+        </div>
+
+        <div class="product" data-price="250">
+            <img class="img" src= "المنتج الثالث عشر.jpg" alt="ملابس">
+            
+            
+            <p>price : 250</p>
+            <button class="buy-btn" data-product="2" data-price="250">شراء</button>
+        </div>
+
+        <div class="product" data-price="250">
+            <img class="img" src= "المنتج الرابع عشر.jpg" alt="ملابس">
+            
+            
+            <p>price : 300</p>
+            <button class="buy-btn" data-product="3" data-price="300">شراء</button>
         </div>
         <!-- يمكنك إضافة المزيد من عناصر المنتجات هنا -->
     </div>
@@ -107,8 +213,8 @@
     <div class="cart">
         <h2>سلة المشتريات</h2>
         <div class="cart-items"></div>
-        <p class="total-price">السعر الإجمالي: 0 جنيه مصري</p>
-        <button class="submit-btn">إرسال الطلب</button>
+        <p class="total-price">price : 0</p>
+        <button class="submit-btn">send request</button>
     </div>
 
     <script>
@@ -125,7 +231,8 @@
                     event.preventDefault();
                     const productName = button.getAttribute('data-product');
                     const productPrice = parseFloat(button.getAttribute('data-price'));
-                    addToCart(productName, productPrice);
+                    const productImageSrc = button.parentNode.querySelector('img').getAttribute('src');
+                    addToCart(productName, productPrice, productImageSrc);
                 });
             });
 
@@ -140,7 +247,7 @@
                 sendOrder(orderList);
             });
 
-            function addToCart(productName, productPrice) {
+            function addToCart(productName, productPrice, productImageSrc) {
                 const cartItem = document.querySelector(`.cart-item[data-product="${productName}"]`);
                 if (cartItem) {
                     const quantityElement = cartItem.querySelector('.product-quantity');
@@ -155,9 +262,9 @@
                     cartItem.setAttribute('data-quantity', '1');
                     cartItem.setAttribute('data-price', productPrice);
                     cartItem.innerHTML = `
-                        <img src="clothing1.jpg" alt="ملابس">
+                        <img src="${productImageSrc}" alt="${productName}">
                         <span class="product-name">${productName}</span>
-                        <span class="product-price">${productPrice} جنيه مصري</span>
+                        <span class="product-price">${productPrice} </span>
                         <span class="product-quantity">1</span>
                         <button class="remove-btn" data-product="${productName}" data-price="${productPrice}">حذف</button>
                     `;
@@ -188,7 +295,7 @@
                 if (totalCartPrice < 0) {
                     totalCartPrice = 0;
                 }
-                totalPriceElement.textContent = "السعر الإجمالي: " + totalCartPrice.toFixed(2) + " جنيه مصري";
+                totalPriceElement.textContent = "السعر الإجمالي: " + totalCartPrice.toFixed(2) ;
             }
 
             function checkCart() {
@@ -208,10 +315,7 @@
                 window.location.href = mailtoLink;
             }
         });
-    </script>
-    <button class="b" onclick="share()">مشاركة</button>
 
-    <script>
         function share() {
             const url = window.location.href;
             const title = document.title;
@@ -236,3 +340,4 @@
     </script>
 </body>
 </html>
+
